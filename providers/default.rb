@@ -5,7 +5,10 @@ def load_current_resource
   @current_resource = Chef::Resource::CopyFile.new(@new_resource.name)
   @current_resource.source(@new_resource.source)
 
-  @checksum = checksum(@current_resource.name)
+  @checksum = nil
+  if ::File.exists? @current_resource.name
+    @checksum = checksum(@current_resource.name)
+  end
 end
 
 def action_copy
