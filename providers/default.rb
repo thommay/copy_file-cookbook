@@ -1,6 +1,8 @@
 require 'chef/mixin/checksum'
 include Chef::Mixin::Checksum
 
+use_inline_resources
+
 def load_current_resource
   @current_resource = Chef::Resource::CopyFile.new(@new_resource.name)
   @current_resource.source(@new_resource.source)
